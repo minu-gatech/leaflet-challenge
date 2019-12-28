@@ -67,7 +67,6 @@ function getSize(mag) {
 
 
 /************************************************************/
-
 function createFeatures(earthquakeData) {
     console.log(earthquakeData)
   // Define a function we want to run once for each feature in the features array
@@ -85,8 +84,7 @@ function createFeatures(earthquakeData) {
     onEachFeature: onEachFeature,
     pointToLayer: function (feature, latlng) {
         console.log(feature.properties.mag)
-        return L.circleMarker(latlng, 
-            {radius: getSize(feature.properties.mag), 
+        return L.circleMarker(latlng, {radius: getSize(feature.properties.mag), 
             fillOpacity: 1, 
             color: 'black', 
             fillColor: getColor(feature.properties.mag), 
@@ -95,8 +93,9 @@ function createFeatures(earthquakeData) {
   });
 
 
-    // Sending our earthquakes layer to the createMap function
-    createMap(earthquakes);
+/************************************************************/  
+  // Sending our earthquakes layer to the createMap function
+  createMap(earthquakes);
 }
 
 
@@ -112,6 +111,23 @@ function createMap(earthquakes) {
     accessToken: API_KEY
   });
 
+//   var darkmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+//     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+//     maxZoom: 18,
+//     id: "mapbox.dark",
+//     accessToken: API_KEY
+//   });
+
+  // Define a baseMaps object to hold our base layers
+  var baseMaps = {
+    "Light Map": lightmap,
+    //"Dark Map": darkmap
+  };
+
+  // Create overlay object to hold our overlay layer
+//   var overlayMaps = {
+//     Earthquakes: earthquakes
+//   };
 
   // Create our map, giving it the streetmap and earthquakes layers to display on load
   var myMap = L.map("map", {
@@ -122,7 +138,14 @@ function createMap(earthquakes) {
     layers: [lightmap, earthquakes]
   });
 
- 
+  // Create a layer control
+  // Pass in our baseMaps and overlayMaps
+  // Add the layer control to the map
+//   L.control.layers(baseMaps, overlayMaps, {
+//     collapsed: false
+//   }).addTo(myMap);
+
+
 // Adding a Legend
 function getLegendColor(d) {
     if (d <= 1){
