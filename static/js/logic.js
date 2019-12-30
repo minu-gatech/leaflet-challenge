@@ -158,7 +158,7 @@ legend.onAdd = function (myMap) {
         console.log("******************************************");
         console.log(grades[i] + 1);
         div.innerHTML +=
-            '<i style="background:red' + getLegendColor(grades[i] + 1) + '"></i> ' +
+            '<i style="background:' + getLegendColor(grades[i] + 1) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
         console.log("******************************************");
     }
